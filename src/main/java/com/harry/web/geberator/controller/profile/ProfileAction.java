@@ -1,5 +1,6 @@
 package com.harry.web.geberator.controller.profile;
 
+import com.harry.web.util.ServletUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,15 +27,10 @@ public class ProfileAction {
     private ProfileService profileService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<Page<Profile>> list(@RequestParam(required = false) Integer current,
-                                              @RequestParam(required = false) Integer pageSize) {
-        if (current == null) {
-            current = 1;
-        }
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-        Page<Profile> aPage = profileService.page(new Page<>(current, pageSize));
+    public ResponseEntity<Page<Profile>> list() {
+        Integer pageNum = ServletUtils.getParameterToInt("pageNum", 1);
+        Integer pageSize = ServletUtils.getParameterToInt("pageSize", 10);
+        Page<Profile> aPage = profileService.page(new Page<>(pageNum, pageSize));
         return new ResponseEntity<>(aPage, HttpStatus.OK);
     }
 
