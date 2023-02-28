@@ -1,0 +1,17 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.41.15.26:3306/cecport_ai?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+
+# MyBatis配置
+mybatis-plus:
+  # 搜索指定包别名
+  type-aliases-package: com.harry.**.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  config-location: classpath:mybatis/mybatis-config.xml
